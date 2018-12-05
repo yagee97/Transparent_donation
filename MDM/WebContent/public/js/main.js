@@ -1,130 +1,65 @@
-function generate_seed()
-{
-	var new_seed = lightwallet.keystore.generateRandomSeed();
+/*
+	Intensify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
 
-	document.getElementById("seed").value = new_seed;
+(function($) {
 
-	generate_addresses(new_seed);
-}
-
-var totalAddresses = 0;
-
-function generate_addresses(seed)
-{
-	if(seed == undefined)
-	{
-		seed = document.getElementById("seed").value;
-	}
-
-	if(!lightwallet.keystore.isSeedValid(seed))
-	{
-		document.getElementById("info").innerHTML = "Please enter a valid seed";
-		return;
-	}
-
-	totalAddresses = prompt("How many addresses do you want to generate");
-
-	if(!Number.isInteger(parseInt(totalAddresses)))
-	{
-		document.getElementById("info").innerHTML = "Please enter valid number of addresses";
-		return;
-	}
-
-	var password = Math.random().toString();
-
-	lightwallet.keystore.createVault({
-		password: password,
-	  	seedPhrase: seed
-	}, function (err, ks) {
-	  	ks.keyFromPassword(password, function (err, pwDerivedKey) {
-	    	if(err)
-	    	{
-	    		document.getElementById("info").innerHTML = err;
-	    	}
-	    	else
-	    	{
-	    		ks.generateNewAddress(pwDerivedKey, totalAddresses);
-	    		var addresses = ks.getAddresses();	
-	    		
-	    		var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
-	    		var html = "";
-
-	    		for(var count = 0; count < addresses.length; count++)
-	    		{
-					var address = addresses[count];
-					var private_key = ks.exportPrivateKey(address, pwDerivedKey);
-					var balance = web3.eth.getBalance("0x" + address);
-
-					html = html + "<li>";
-					html = html + "<p><b>Address: </b>0x" + address + "</p>";
-					html = html + "<p><b>Private Key: </b>0x" + private_key + "</p>";
-					html = html + "<p><b>Balance: </b>" + web3.fromWei(balance, "ether") + " ether</p>";
-		    		html = html + "</li>";
-	    		}
-
-	    		document.getElementById("list").innerHTML = html;
-	    	}
-	  	});
+	skel.breakpoints({
+		xlarge:	'(max-width: 1680px)',
+		large:	'(max-width: 1280px)',
+		medium:	'(max-width: 980px)',
+		small:	'(max-width: 736px)',
+		xsmall:	'(max-width: 480px)'
 	});
-}
 
-function send_ether()
-{
-	var	seed = document.getElementById("seed").value;
+	$(function() {
 
-	if(!lightwallet.keystore.isSeedValid(seed))
-	{
-		document.getElementById("info").innerHTML = "Please enter a valid seed";
-		return;
-	}
+		var	$window = $(window),
+			$body = $('body'),
+			$header = $('#header');
 
-	var password = Math.random().toString();
+		// Disable animations/transitions until the page has loaded.
+			$body.addClass('is-loading');
 
-	lightwallet.keystore.createVault({
-		password: password,
-	  	seedPhrase: seed
-	}, function (err, ks) {
-	  	ks.keyFromPassword(password, function (err, pwDerivedKey) {
-	    	if(err)
-	    	{
-	    		document.getElementById("info").innerHTML = err;
-	    	}
-	    	else
-	    	{
-	    		ks.generateNewAddress(pwDerivedKey, totalAddresses);
+			$window.on('load', function() {
+				window.setTimeout(function() {
+					$body.removeClass('is-loading');
+				}, 100);
+			});
 
-	    		ks.passwordProvider = function (callback) {
-			      	callback(null, password);
-			    };
+		// Fix: Placeholder polyfill.
+			$('form').placeholder();
 
-			    var provider = new HookedWeb3Provider({
-  					host: "http://localhost:8545",
-  					transaction_signer: ks
+		// Prioritize "important" elements on medium.
+			skel.on('+medium -medium', function() {
+				$.prioritize(
+					'.important\\28 medium\\29',
+					skel.breakpoint('medium').active
+				);
+			});
+
+		// Scrolly.
+			$('.scrolly').scrolly({
+				offset: function() {
+					return $header.height();
+				}
+			});
+
+		// Menu.
+			$('#menu')
+				.append('<a href="#menu" class="close"></a>')
+				.appendTo($body)
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					side: 'right'
 				});
 
-			    var web3 = new Web3(provider);
-
-			    var from = document.getElementById("address1").value;
-				var to = document.getElementById("address2").value;
-			    var value = web3.toWei(document.getElementById("ether").value, "ether");
-
-			    web3.eth.sendTransaction({
-			    	from: from,
-			    	to: to,
-			    	value: value,
-			    	gas: 21000
-			    }, function(error, result){
-			    	if(error)
-			    	{	
-			    		document.getElementById("info").innerHTML = error;
-			    	}
-			    	else
-			    	{
-			    		document.getElementById("info").innerHTML = "Txn hash: " + result;
-			    	}
-			    })
-	    	}
-	  	});
 	});
-}
+
+})(jQuery);
