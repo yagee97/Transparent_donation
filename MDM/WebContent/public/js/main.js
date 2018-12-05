@@ -7,66 +7,74 @@ function generate_seed()
 	generate_addresses(new_seed);
 }
 
-var totalAddresses = 0;
+var totalAddresses = 1;
 
 function generate_addresses(seed)
 {
-	if(seed == undefined)
-	{
-		seed = document.getElementById("seed").value;
-	}
+   if(seed == undefined)
+   {
+      seed = document.getElementById("seed").value;
+   }
 
-	if(!lightwallet.keystore.isSeedValid(seed))
-	{
-		document.getElementById("info").innerHTML = "Please enter a valid seed";
-		return;
-	}
+   if(!lightwallet.keystore.isSeedValid(seed))
+   {
+      document.getElementById("info").innerHTML = "Please enter a valid seed";
+      return;
+   }
 
-	totalAddresses = prompt("How many addresses do you want to generate");
+   
 
-	if(!Number.isInteger(parseInt(totalAddresses)))
-	{
-		document.getElementById("info").innerHTML = "Please enter valid number of addresses";
-		return;
-	}
+   if(!Number.isInteger(parseInt(totalAddresses)))
+   {
+      document.getElementById("info").innerHTML = "Please enter valid number of addresses";
+      return;
+   }
 
-	var password = Math.random().toString();
+   var password = Math.random().toString();
 
-	lightwallet.keystore.createVault({
-		password: password,
-	  	seedPhrase: seed
-	}, function (err, ks) {
-	  	ks.keyFromPassword(password, function (err, pwDerivedKey) {
-	    	if(err)
-	    	{
-	    		document.getElementById("info").innerHTML = err;
-	    	}
-	    	else
-	    	{
-	    		ks.generateNewAddress(pwDerivedKey, totalAddresses);
-	    		var addresses = ks.getAddresses();	
-	    		
-	    		var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+   lightwallet.keystore.createVault({
+      password: password,
+        seedPhrase: seed
+   }, function (err, ks) {
+        ks.keyFromPassword(password, function (err, pwDerivedKey) {
+          if(err)
+          {
+             document.getElementById("info").innerHTML = err;
+          }
+          else
+          {
+             ks.generateNewAddress(pwDerivedKey, totalAddresses);
+             var addresses = ks.getAddresses();   
+             
+             var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-	    		var html = "";
+             var html = "";
+             var data1="";
+             var data2="";
 
-	    		for(var count = 0; count < addresses.length; count++)
-	    		{
-					var address = addresses[count];
-					var private_key = ks.exportPrivateKey(address, pwDerivedKey);
-					var balance = web3.eth.getBalance("0x" + address);
+             for(var count = 0; count < addresses.length; count++)
+             {
+               var address = addresses[count];
+               var private_key = ks.exportPrivateKey(address, pwDerivedKey);
+               var balance = web3.eth.getBalance("0x" + address);
 
-					html = html + "<li>";
-					html = html + "<p><b>Address: </b>0x" + address + "</p>";
-					html = html + "<p><b>Private Key: </b>0x" + private_key + "</p>";
-					html = html + "<p><b>Balance: </b>" + web3.fromWei(balance, "ether") + " ether</p>";
-		    		html = html + "</li>";
-	    		}
+               //html = html + "<blockquote>";
+               html = html + "<b>Address: </b>0x" + address + "</br>";
+               html = html + "<b>Private Key: </b>0x" + private_key + "</br>";
+                //html = html + "</blockquote>"; 
+               
+               data1= data1 + "0x"+address;
+               data2 = data2 + "0x"+private_key;
+               
+             }
 
-	    		document.getElementById("list").innerHTML = html;
-	    	}
-	  	});
-	});
+             //document.getElementById("list").innerHTML = html;
+             document.getElementById("address").innerHTML = data1;
+             document.getElementById("private_key").innerHTML = data2;
+          }
+        
+      });
+   });
 }
 
 function send_ether()
@@ -75,7 +83,7 @@ function send_ether()
 
 	if(!lightwallet.keystore.isSeedValid(seed))
 	{
-		document.getElementById("info").innerHTML = "Please enter a valid seed";
+		document.getElementById("txnhash").innerHTML = "Please enter a valid seed";
 		return;
 	}
 
@@ -88,7 +96,7 @@ function send_ether()
 	  	ks.keyFromPassword(password, function (err, pwDerivedKey) {
 	    	if(err)
 	    	{
-	    		document.getElementById("info").innerHTML = err;
+	    		document.getElementById("txnhash").innerHTML = err;
 	    	}
 	    	else
 	    	{
@@ -117,11 +125,11 @@ function send_ether()
 			    }, function(error, result){
 			    	if(error)
 			    	{	
-			    		document.getElementById("info").innerHTML = error;
+			    		document.getElementById("txnhash").innerHTML = error;
 			    	}
 			    	else
 			    	{
-			    		document.getElementById("info").innerHTML = "Txn hash: " + result;
+			    		document.getElementById("txnhash").innerHTML = "Txn hash: " + result;
 			    	}
 			    })
 	    	}
