@@ -1,0 +1,33 @@
+# Transparent_donation
+졸업작품_블록체인 기반의 투명한 기부 플랫폼
+
+<br>
+
+### This is a graduate work of software department of Gachon University.
+#### 
+The purpose of this program(My Digi Money) is to make donations transparent and not to limit donation units to money,
+<br>such as donating **forgotten membership points**  Using **block chain network** 
+
+![projectImg](https://user-images.githubusercontent.com/19389288/58070224-32140700-7bd3-11e9-861d-445e4cff36ac.PNG)
+
+
+Though this program, donors can see if their donations have been delivered correctly.<br>
+It makes people more comfortable and close to participate in donations.
+<br>
+<br>
+<br>
+
+## How to use
+### 1. Constuct environment.
+### https://github.com/AhnYeonsun/Transparent_donation/blob/master/transaction.md
+<br>
+
+### 2. You can change our homepage.
+go to project folder, then you can use html, css, javascript source.
+Also, web3 provider source too!
+<br> 
+
+### and go to this =>
+It is our program's progress page
+
+
