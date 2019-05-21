@@ -43,7 +43,7 @@ It is our program's progress page
 * Web3.js library
 * Geth
 
-<front-end>
+front-end
 * Html, CSS, Javascript
 * Spring boot
 
