@@ -34,6 +34,21 @@ It is our program's progress page
 <br>
 <br>
 
+### technique
+* Ubuntu server 16.04
+* Vmware14
+* Windows 10
+* go-Ethereum 1.3.6
+* Remix (browser-solidity)
+* Web3.js library
+* Geth
+
+<front-end>
+* Html, CSS, Javascript
+* Spring boot
+
+<hr>
+
 ### Membor Info
 
 > Lee ye ji: yagee1997@gmail.com<br>
