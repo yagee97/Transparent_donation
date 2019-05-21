@@ -25,9 +25,23 @@ It makes people more comfortable and close to participate in donations.
 ### 2. You can change our homepage.
 go to project folder, then you can use html, css, javascript source.
 Also, web3 provider source too!
+
 <br> 
 
 ### and go to this =>
 It is our program's progress page
 
+<br>
+<br>
 
+### Membor Info
+
+> Lee ye ji: yagee1997@gmail.com<br>
+
+> Ahn yeon sun: yeonsun0517@gmail.com<br>
+
+> Lee jong hyun: ant9407@gmail.com<br>
+
+> Hong jin hyung: hjhng125@gmail.com
+<br>
+<br>
