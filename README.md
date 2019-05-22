@@ -28,7 +28,9 @@ Also, web3 provider source too!
 
 <br> 
 
-### and go to this =>
+### and go to
+https://github.com/AhnYeonsun/Transparent_donation/wiki/Progress(Page-with-Function) <br>
+
 It is our program's progress page
 
 <br>
