@@ -34,6 +34,8 @@ It is our program's progress page
 <br>
 <br>
 
+<hr>
+
 ### technique
 * Ubuntu server 16.04
 * Vmware14
