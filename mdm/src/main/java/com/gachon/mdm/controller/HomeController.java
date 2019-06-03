@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
-//mapping
+//mapping forward html
 @RequestMapping("/")
 @Controller
 @RequiredArgsConstructor
