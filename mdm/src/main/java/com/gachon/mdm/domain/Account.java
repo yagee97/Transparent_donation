@@ -8,6 +8,7 @@ import lombok.extern.apachecommons.CommonsLog;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+// bean about account
 @Getter
 @Embeddable
 @NoArgsConstructor
