@@ -17,7 +17,7 @@ public class UserRequestDto {
     private String password;
     private String checkPassword;
 
-    // set user info 
+    // set user info like name, email, password, password_key
     @Builder
     public UserRequestDto(String name,String email, String password, String checkPassword) {
         setName(name);
