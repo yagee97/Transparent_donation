@@ -19,7 +19,7 @@ It makes people more comfortable and close to participate in donations.
 
 ## How to use
 ### 1. Constuct environment.
-### https://github.com/AhnYeonsun/Transparent_donation/blob/master/transaction.md
+#### https://github.com/AhnYeonsun/Transparent_donation/blob/master/transaction.md
 <br>
 
 ### 2. You can change our homepage.
