@@ -26,7 +26,7 @@ It makes people more comfortable and close to participate in donations.
 go to project folder, then you can use html, css, javascript source.
 Also, web3 provider source too!
 
-<br> 
+<br> df
 
 ### and go to
 https://github.com/AhnYeonsun/Transparent_donation/wiki/Progress(Page-with-Function) <br>
